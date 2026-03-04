@@ -84,6 +84,7 @@ def create_unified_dataframe() -> pd.DataFrame:
         stmt = select(Category).join(
             Transaction
         ).group_by(Category.id)
+        
         categories = session.execute(stmt).scalars().all()
 
         if not categories:
