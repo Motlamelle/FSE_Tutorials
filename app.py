@@ -29,7 +29,7 @@ def main():
 @app.route("/api/financial_summary", methods=["GET"])
 def api_financial_summary():
     """API endpoint to get the student-facing text report."""
-    return jsonify({"report": generate_text_report()})
+    return jsonify(generate_text_report())
 
 
 # TODO Complete the API endpoint below to return transactions for a specific category
@@ -40,7 +40,12 @@ def api_transactions_by_category():
     category = request.args.get("category")
     if not category:
         return jsonify({"error": "Category query parameter is required"}), 400
-    return ""
+    transactions = get_transactions_by_category(category)
+
+    # add 404 error handling if no transactions found for the category
+    if not transactions:
+        return jsonify({"error": f"No transactions found for category '{category}'"}), 404
+    return jsonify(transactions)
 
 
 @app.route("/api/category", methods=["GET"])
