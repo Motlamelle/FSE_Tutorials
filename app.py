@@ -29,7 +29,7 @@ def main():
 @app.route("/api/financial_summary", methods=["GET"])
 def api_financial_summary():
     """API endpoint to get the student-facing text report."""
-    return ""
+    return jsonify({"report": generate_text_report()})
 
 
 # TODO Complete the API endpoint below to return transactions for a specific category
