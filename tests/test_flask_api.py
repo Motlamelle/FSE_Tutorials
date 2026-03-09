@@ -16,7 +16,13 @@ def client():
 
 def test_financial_summary_endpoint(client):
     """Test that /api/financial_summary returns the correct text report."""
-    response = client.get("/api/financial_summary")
+    with patch("app.generate_text_report", return_value={
+        "Daily Burn Rate": "R100/day",
+        "Entertainment %": "20%",
+        "Essential Coverage": "80%",
+        "Net Savings": "R5000/month"
+    }):
+        response = client.get("/api/financial_summary")
 
     assert response.status_code == 200
     assert response.is_json
