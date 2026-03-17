@@ -9,7 +9,7 @@ services:
     - key: PYTHON_VERSION
       value: 3.11.11
     - key: SECRET_KEY
-      generate: true
+      generateValue: true
     - key: CURRENCY_SYMBOL
       value: R
     - key: DATABASE_URL
